@@ -9,7 +9,7 @@ class Trigram
     end
   end
 
-  getter trigrams : Hash(UInt32, Result)
+  getter trigrams : Hash(Int32, Result)
   getter doc_ids : Hash(Int32, Bool)
   getter max_doc_id : Int32
 
@@ -18,12 +18,12 @@ class Trigram
     this
   end
 
-  def self.parse(str : String) : Array(UInt32)
-    return [] of UInt32 if str.empty?
-    results = [] of UInt32
+  def self.parse(str : String) : Array(Int32)
+    return [] of Int32 if str.empty?
+    results = [] of Int32
 
-    0.upto(str.size - 3) do |i|
-      trigram = str[i].ord.to_u32 << 16 | str[i + 1].ord.to_u32 << 8 | str[i + 2].ord.to_u32
+    (str.size - 2).times do |i|
+      trigram = str[i].ord << 16 | str[i + 1].ord << 8 | str[i + 2].ord
       results << trigram
     end
 
@@ -31,7 +31,7 @@ class Trigram
   end
 
   def initialize
-    @trigrams = {} of UInt32 => Result
+    @trigrams = {} of Int32 => Result
     @doc_ids = {} of Int32 => Bool
     @max_doc_id = 0
   end
