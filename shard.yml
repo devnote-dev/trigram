@@ -1,0 +1,9 @@
+name: trigram
+version: 0.1.0
+
+authors:
+  - Devonte W <https://github.com/devnote-dev>
+
+crystal: 1.8.2
+
+license: MIT
